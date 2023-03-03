@@ -1,10 +1,8 @@
-import koaRouter from 'koa-router';
+import  express  from 'express';
 import { auth } from '../../auth/index.js';
 import { getAllMessages } from '../controllers/mensajes.controller.js';
 
-const routerMensajes = new koaRouter({
-    prefix: '/api/mensajes'
-});
+const routerMensajes = express.Router();
 
 routerMensajes.get('/', auth, getAllMessages); 
 

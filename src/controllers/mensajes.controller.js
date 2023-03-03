@@ -1,6 +1,6 @@
 import { mensajesDao as apiMensajes } from '../service/index.js';
 import { normalize, schema } from 'normalizr';
-import { logger } from '../config/configLogger.js';
+import { logger } from '../utils/configLogger.js';
 
 
 const schemaAuthor = new schema.Entity('author', {}, { idAttribute: 'email' });
@@ -23,8 +23,8 @@ export async function agregarMensaje(mensaje) {
 };
 
 
-export async function getAllMessages(ctx) {
-    const {url, method } = ctx.req;
+export async function getAllMessages(req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/mensajes${url}`);
-    ctx.render('viewChat', await apiMensajes.getAll());
+    res.render('viewChat', await apiMensajes.getAll());
 }; 

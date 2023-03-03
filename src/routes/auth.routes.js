@@ -1,10 +1,8 @@
-import koaRouter from 'koa-router';
+import { Router } from 'express';
 import { auth } from '../../auth/index.js';
 import { upload, home, login, viewLogout, register, registerNewUser, loginError, pass } from '../controllers/auth.controller.js';
 
-const routerAuth = new koaRouter({
-    prefix: '/api'
-});
+const routerAuth = new Router();
 
 routerAuth.get('/', home);
 

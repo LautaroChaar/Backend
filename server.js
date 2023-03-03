@@ -1,56 +1,60 @@
-import koa from 'koa';
-import { koaBody } from 'koa-body';
-import koaStatic from 'koa-static';
-import passport from 'passport';
-import session from 'koa-session';
-import Pug from 'koa-pug';
-import mongo from 'koa-mongo';
-import { logger } from './src/config/configLogger.js';
+import  express  from 'express';
+import { createServer  } from 'http';
 import { Server } from 'socket.io';
+import {routerProductos} from './src/routes/productos.routes.js';
+import {routerCarrito} from './src/routes/carrito.routes.js';
+import { routerMensajes } from './src/routes/mensajes.routes.js';
 import { agregarMensaje, listarMensajesNormalizados } from './src/controllers/mensajes.controller.js';
 import { routerAuth } from './src/routes/auth.routes.js';
 import { routerHome } from './src/routes/home.routes.js';
-import { routerProductos } from './src/routes/productos.routes.js';
-import { routerCarrito } from './src/routes/carrito.routes.js';
-import { routerMensajes } from './src/routes/mensajes.routes.js';
+import connectMongo from 'connect-mongo';
+import session from "express-session";
+import passport from 'passport';
 import minimist from 'minimist';
 import cluster from 'cluster';
 import os from 'os';
-import { config } from './src/config/config.js';
+import { logger } from './src/utils/configLogger.js';
+import { config } from './src/utils/config.js';
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
 
 
-const app = new koa();
-const io = new Server(app);
-
-const pug = new Pug({
-    viewPath: './src/views',
-    basedir: './src/views',
-    app: app 
+const MongoStore = connectMongo.create({
+    mongoUrl: config.server.MONGO_URL,
+    ttl: 600 
 })
 
-app.use(mongo({
-    url: config.server.MONGO_URL,
-    pass: config.server.SECRET_KEY,
-    max: 600,
-    min: 1,
-}));
 
-app.keys = [config.server.SECRET_KEY];
-
-app.use(session(app));
-
-app.use(koaBody());
+app.use(session({
+    store: MongoStore,
+    secret: config.server.SECRET_KEY,
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(koaStatic('./public'));
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
-app.use(routerProductos.routes());
-app.use(routerHome.routes());
-app.use(routerMensajes.routes());
-app.use(routerCarrito.routes());
-app.use(routerAuth.routes());
+app.set('views', './src/views');
+app.set('view engine', 'pug');
+
+app.use('/api/productos', routerProductos);
+app.use('/api/carrito', routerCarrito);
+app.use('/api/mensajes', routerMensajes);
+app.use('/api/', routerAuth);
+app.use('/api/home', routerHome);
+
+app.get('*', (req, res)=>{
+    const {url, method } = req;
+    logger.warn(`Ruta ${method} ${url} no implementada`)
+    res.render('viewRutaIncorrecta', { url, method });
+});
 
 let args = minimist(process.argv.slice(2));
 
@@ -61,7 +65,7 @@ const CPU_CORES = os.cpus().length;
 const MODO = args.modo || args.m || options.default.modo;
 const PORT =  process.env.PORT || 8080;
 
-parseInt(process.argv[2]) || args.port || args.p || options.default.port ;
+// parseInt(process.argv[2]) || args.port || args.p || options.default.port ;
 
 
 if (cluster.isPrimary && MODO == 'CLUSTER') {
@@ -82,11 +86,13 @@ if (cluster.isPrimary && MODO == 'CLUSTER') {
         throw new Error()
     } 
 
-    const server = app.listen(PORT, () => {
-        logger.info(`Servidor escuchando en puerto http://localhost:${PORT}/api`);
+    const server = httpServer.listen(PORT, () => {
+        logger.info(`Servidor escuchando en puerto http://localhost:${PORT}/api - PID WORKER ${process.pid}`);
+        // `
     });
 
     server.on('error', err => logger.error(`error en server ${err}`));
+
 
     io.on('connection', async socket => {
         logger.info(`Nuevo cliente conectado! ${socket.id}`);
@@ -101,4 +107,4 @@ if (cluster.isPrimary && MODO == 'CLUSTER') {
     });
 }
 
-export {app};
+

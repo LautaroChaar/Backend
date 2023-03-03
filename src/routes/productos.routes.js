@@ -1,21 +1,16 @@
-import koaRouter from 'koa-router';
-import { config } from '../config/config.js';
-import { logger } from '../config/configLogger.js';
+import  express  from 'express';
+import { config } from '../utils/config.js';
+import { logger } from '../utils/configLogger.js';
 import { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct, deleteAllProducts } from '../controllers/productos.controller.js';
 
-const routerProductos = new koaRouter({
-    prefix: '/api/productos'
-});
+const routerProductos = express.Router();
 
 const isAdmin = config.isAdmin;
 
-const admin = (ctx, next) => {
+const admin = (req, res, next) => {
     if (!isAdmin) {
-        logger.error(`Error: Ingreso no autorizado mediante el metodo ${ctx.req.method}`);
-        ctx.body = {
-            status: 'Forbidden',
-            menssage: {code: 403, msg: `Error: Ingreso no autorizado mediante el metodo ${ctx.req.method}`}
-        }
+        logger.error(`Error: Ingreso no autorizado mediante el metodo ${req.method}`);
+        res.status(403).json({code: 403, msg: `Error: Ingreso no autorizado mediante el metodo ${req.method}`});
     } else {
         next();
     }

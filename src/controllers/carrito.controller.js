@@ -1,4 +1,4 @@
-import { logger } from '../config/configLogger.js';
+import { logger } from '../utils/configLogger.js';
 import { carritosDao as apiCarrito } from '../service/index.js';
 import { productosDao as apiProductos } from '../service/index.js';
 import { usuariosDao as apiUsuarios } from '../service/index.js';
@@ -23,28 +23,22 @@ const transporter = createTransport({
    }
 });
 
-export async function deleteCartById(ctx) {
-    const {url, method } = ctx.req;
+export async function deleteCartById(req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    ctx.body = {
-        status: 'success',
-        data: await apiCarrito.deleteById(ctx.params.id)
-    }
+    res.json((await apiCarrito.deleteById(req.params.id)));
 }; 
 
-export async function getCartProducts(ctx) {
-    const {url, method } = ctx.req;
+export async function getCartProducts(req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const carrito = await apiCarrito.getById(ctx.params.id);
-    ctx.body = {
-        status: 'success',
-        data: carrito.productos
-    }
+    const carrito = await apiCarrito.getById(req.params.id);
+    res.json((carrito.productos));
 }; 
 
-export async function cartView(ctx) {
-    const {url, method } = ctx.req;
-    const datos = await apiUsuarios.getById(ctx.req.user.username)
+export async function cartView(req, res) {
+    const {url, method } = req;
+    const datos = await apiUsuarios.getById(req.user.username)
     const info = {
         edad: usuario.getAge(datos.dateOfBirth),
         aniversario: usuario.getBirthday(datos.dateOfBirth)
@@ -53,27 +47,29 @@ export async function cartView(ctx) {
     logger.info(`Ruta ${method} /api/carrito${url}`);
     const carrito = await apiCarrito.getById(datos.id);
     const userInfo =  new UsuarioDTO(datos, info);
-    ctx.render('viewCarrito', {carrito, userInfo, srcImg});
+    console.log(userInfo)
+    res.render('viewCarrito', {carrito, userInfo, srcImg});
 }; 
 
 
-export async function addToCart (ctx) {
-    const {url, method } = ctx.req;
+export async function addToCart (req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const id = ctx.req.user.id;
+    const id = req.user.id;
     const carrito = await apiCarrito.getById(id);
-    const producto = await apiProductos.getById(ctx.req.body.idProd);
+    const producto = await apiProductos.getById(req.body.idProd);
     carrito.productos.push(producto);
     const elem = {...carrito, id: Number(id)};
     await apiCarrito.update(elem);
-    ctx.redirect('/api/home');
+    res.redirect('/api/home');
 }; 
 
 
-export async function buyProducts(ctx) {
-    const {url, method } = ctx.req;
+export async function buyProducts(req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const { id, name, username, phone } = ctx.req.user;
+
+    const { id, name, username, phone } = req.user;
     const carrito = await apiCarrito.getById(id);
     const lista = [];
     for (let i=0; i < carrito.productos.length; i++) {
@@ -102,20 +98,20 @@ export async function buyProducts(ctx) {
     logger.info(message); 
 
     await apiCarrito.emptyCart(id);
-    ctx.redirect('/api/home');
+    res.redirect('/api/home');
 }; 
 
-export async function deleteCartProduct (ctx) {
-    const {url, method } = ctx.req;
+export async function deleteCartProduct (req, res) {
+    const {url, method } = req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const carrito = await apiCarrito.getById(ctx.params.id);
-    const index = carrito.productos.findIndex( p => p.id == ctx.params.id_prod);
+    const carrito = await apiCarrito.getById(req.params.id);
+    const index = carrito.productos.findIndex( p => p.id == req.params.id_prod);
     if (index != -1 ) {
         carrito.productos.splice(index, 1);
-        const elem = {...carrito, id: Number(ctx.params.id)};
+        const elem = {...carrito, id: Number(req.params.id)};
         await apiCarrito.update(elem);
     }
-    ctx.end();
+    res.end();
 };
 
 
