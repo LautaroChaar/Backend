@@ -3,8 +3,6 @@ import passport from 'passport';
 import { Strategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 import { logger } from '../utils/configLogger.js';
-import * as dotenv from 'dotenv'; 
-dotenv.config()
 
 import { usuariosDao as apiUsuarios } from '../daos/index.js';
 
@@ -53,7 +51,7 @@ passport.deserializeUser (async (email, done) => {
 routerAuth.get('/', (req, res) => {
     const {url, method } = req;
     logger.info(`Ruta ${method} ${url}`);
-    res.redirect('/home');
+    res.redirect('/api/home');
 })
 
 routerAuth.get('/login', (req, res) => {
@@ -62,13 +60,14 @@ routerAuth.get('/login', (req, res) => {
     res.render('viewLogin');
 })
 
-routerAuth.post('/login', passport.authenticate('local', {successRedirect: '/', failureRedirect: '/login-error'}))
+routerAuth.post('/login', passport.authenticate('local', {successRedirect: '/api/', failureRedirect: '/api/login-error'}))
 
 routerAuth.get('/logout', (req, res)=> {
     const {url, method } = req;
+    const nombre = req.user.username;
     logger.info(`Ruta ${method} ${url}`);
     req.logOut(err => {
-        res.redirect('/');
+        res.render('viewLogout', { nombre });
     });
 })
 
@@ -85,7 +84,7 @@ routerAuth.post('/registro', async (req, res) => {
     if (validationRegex.test(username) && (!nuevoUsuario)) {
         const newUser = {username, password: await generateHashPassword(password)};
         await apiUsuarios.add(newUser);
-        res.redirect('/login');
+        res.redirect('/api/login');
     } else {
         res.render('viewRegistroFallido', {username})
     }

@@ -52,27 +52,28 @@ app.use('/api/productos', routerProductos);
 app.use('/api/carrito', routerCarrito);
 app.use('/api/productos-test', routerRandomProductos);
 app.use('/api/mensajes', routerMensajes);
-app.use(routerAuth);
-app.use('/home', routerHome);
+app.use('/api/', routerAuth);
+app.use('/api/home', routerHome);
 app.use('/api/randoms', routerRandoms);
-app.use('/info', routerInfo);
+app.use('/api/info', routerInfo);
 
 
 app.get('*', (req, res)=>{
     const {url, method } = req;
     logger.warn(`Ruta ${method} ${url} no implementada`)
-    res.send(`Ruta ${method} ${url} no está implementada`);
+    res.render('viewRutaIncorrecta', { url, method });
 });
 
 let args = minimist(process.argv.slice(2));
 
-let options = {default: {port: 8080, modo: 'FORK'}};
+let options = {default: { modo: 'FORK'}};
 minimist([], options);
 
 const CPU_CORES = os.cpus().length;
 const MODO = args.modo || args.m || options.default.modo;
-const PORT = parseInt(process.argv[2]) || args.port || args.p || options.default.port;
+const PORT =  process.env.PORT;
 
+// parseInt(process.argv[2]) || args.port || args.p || options.default.port ;
 
 
 if (cluster.isPrimary && MODO == 'CLUSTER') {
@@ -94,7 +95,8 @@ if (cluster.isPrimary && MODO == 'CLUSTER') {
     } 
 
     const server = httpServer.listen(PORT, () => {
-        logger.info(`Servidor escuchando en puerto http://localhost:${PORT} - PID WORKER ${process.pid}`);
+        logger.info(`Servidor escuchando ${PORT}`);
+        // en puerto http://localhost:${PORT} - PID WORKER ${process.pid}`
     });
 
     server.on('error', err => logger.error(`error en server ${err}`));
