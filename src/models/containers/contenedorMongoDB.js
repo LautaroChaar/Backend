@@ -52,7 +52,7 @@ class ContenedorMongoDB {
             }
             const obj =  { ...elem, timestamp, id };
             await this.model.create(obj);
-            return (`Producto ${JSON.stringify(obj)} agregado con exito!`);
+            return (obj);
         } catch (error) {
             logger.error(error);
             throw new CustomError(500, 'Add', 'Error al agregar elemento.');
@@ -69,7 +69,7 @@ class ContenedorMongoDB {
                 throw new CustomError(404, 'Update', 'Elemento no encontrado.');
             } else {
                 await this.model.updateOne({id: id}, {$set: {...elem}});
-                return (`Producto ${id} actualizado con exito!`);
+                return elem;
             }
         } catch (error) {
             logger.error(error);

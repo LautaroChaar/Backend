@@ -7,6 +7,7 @@ import { routerMensajes } from './src/routes/mensajes.routes.js';
 import { agregarMensaje, listarMensajesNormalizados } from './src/controllers/mensajes.controller.js';
 import { routerAuth } from './src/routes/auth.routes.js';
 import { routerHome } from './src/routes/home.routes.js';
+import { routerGraphql } from './src/routes/graphql.routes.js';
 import connectMongo from 'connect-mongo';
 import session from "express-session";
 import passport from 'passport';
@@ -16,6 +17,9 @@ import cluster from 'cluster';
 import os from 'os';
 import { logger } from './src/config/configLogger.js';
 import { config } from './src/config/config.js';
+import { graphqlHTTP } from 'express-graphql';
+import GraphqlSchema from './src/graphql/schema.js'
+import { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct, getCartProducts, addToCart, deleteCartProduct } from './src/graphql/resolver.js';
 
 const app = express();
 const httpServer = createServer(app);
@@ -33,6 +37,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 
 if(config.server.ENVIRONMENT == 'development') {
     app.use(cors())
@@ -59,6 +64,22 @@ app.use('/api/carrito', routerCarrito);
 app.use('/api/mensajes', routerMensajes);
 app.use('/api/', routerAuth);
 app.use('/api/home', routerHome);
+
+app.use('/api/graphql', routerGraphql, graphqlHTTP({
+    schema: GraphqlSchema,
+    rootValue: {
+        getAllProducts,
+        getProductById,
+        addProduct,
+        updateProduct,
+        deleteProduct,
+        getCartProducts,
+        addToCart,
+        deleteCartProduct
+    },
+    graphiql: true,
+}));
+
 
 app.get('*', (req, res)=>{
     const {url, method } = req;
