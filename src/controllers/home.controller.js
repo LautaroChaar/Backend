@@ -1,4 +1,4 @@
-import { logger } from '../utils/configLogger.js';
+import { logger } from '../config/configLogger.js';
 import { productosDao as apiProductos } from '../service/index.js';
 import { carritosDao as apiCarritos } from '../service/index.js';
 

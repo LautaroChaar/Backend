@@ -1,6 +1,6 @@
 import { mensajesDao as apiMensajes } from '../service/index.js';
 import { normalize, schema } from 'normalizr';
-import { logger } from '../utils/configLogger.js';
+import { logger } from '../config/configLogger.js';
 
 
 const schemaAuthor = new schema.Entity('author', {}, { idAttribute: 'email' });

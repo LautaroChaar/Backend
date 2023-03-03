@@ -1,6 +1,6 @@
 import  express  from 'express';
-import { config } from '../utils/config.js';
-import { logger } from '../utils/configLogger.js';
+import { config } from '../config/config.js';
+import { logger } from '../config/configLogger.js';
 import { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct, deleteAllProducts } from '../controllers/productos.controller.js';
 
 const routerProductos = express.Router();

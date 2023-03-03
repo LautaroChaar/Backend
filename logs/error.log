@@ -1,0 +1,134 @@
+[2022-12-22T12:31:40.382] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:40:20.713] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:40:43.496] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:41:04.534] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:41:21.636] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:44:28.482] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:44:51.712] [ERROR] default - TypeError: this.model.updateOne(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T12:45:09.771] [ERROR] default - TypeError: this.model.update(...) is not a function
+    at ProductosDaoMongoDB.update (file:///C:/backend/desafio/src/models/containers/contenedorMongoDB.js:72:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async updateProduct (file:///C:/backend/desafio/src/controllers/productos.controller.js:43:15)
+[2022-12-22T15:13:54.821] [ERROR] default - CustomError {
+  codigo: 404,
+  descripcion: 'DeleteById',
+  detalle: 'Elemento no encontrado.'
+}
+[2022-12-22T15:13:54.863] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-22T15:13:54.866] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-22T15:17:23.758] [ERROR] default - CustomError {
+  codigo: 404,
+  descripcion: 'DeleteById',
+  detalle: 'Elemento no encontrado.'
+}
+[2022-12-22T15:17:23.796] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-22T15:17:23.798] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-22T15:36:46.696] [ERROR] default - CustomError {
+  codigo: 404,
+  descripcion: 'DeleteById',
+  detalle: 'Elemento no encontrado.'
+}
+[2022-12-22T15:36:46.732] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-22T15:36:46.734] [ERROR] default - MongoExpiredSessionError: Cannot use a session that has ended
+    at applySession (C:\backend\desafio\node_modules\mongodb\lib\sessions.js:660:16)
+    at Connection.command (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection.js:271:53)
+    at C:\backend\desafio\node_modules\mongodb\lib\sdam\server.js:211:18
+    at Object.callback (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:302:13)
+    at ConnectionPool.processWaitQueue (C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:481:33)
+    at C:\backend\desafio\node_modules\mongodb\lib\cmap\connection_pool.js:205:37
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+  [Symbol(errorLabels)]: Set(0) {}
+}
+[2022-12-23T10:31:39.786] [ERROR] default - Error: carritos validation failed: id: Path `id` is required.
+    at ValidationError.inspect (C:\backend\desafio\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2273:40)
+    at Object.format (node:internal/util/inspect:2130:10)
+    at basicLayout (C:\backend\desafio\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\backend\desafio\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\backend\desafio\node_modules\log4js\lib\appenders\logLevelFilter.js:10:7
+    at C:\backend\desafio\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>) {
+  errors: {
+    id: ValidatorError: Path `id` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'id',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carritos validation failed'
+}
