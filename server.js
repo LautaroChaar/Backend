@@ -1,91 +1,56 @@
-import  express  from 'express';
-import { createServer  } from 'http';
+import koa from 'koa';
+import { koaBody } from 'koa-body';
+import koaStatic from 'koa-static';
+import passport from 'passport';
+import session from 'koa-session';
+import Pug from 'koa-pug';
+import mongo from 'koa-mongo';
+import { logger } from './src/config/configLogger.js';
 import { Server } from 'socket.io';
-import {routerProductos} from './src/routes/productos.routes.js';
-import {routerCarrito} from './src/routes/carrito.routes.js';
-import { routerMensajes } from './src/routes/mensajes.routes.js';
 import { agregarMensaje, listarMensajesNormalizados } from './src/controllers/mensajes.controller.js';
 import { routerAuth } from './src/routes/auth.routes.js';
 import { routerHome } from './src/routes/home.routes.js';
-import { routerGraphql } from './src/routes/graphql.routes.js';
-import connectMongo from 'connect-mongo';
-import session from "express-session";
-import passport from 'passport';
-import cors from 'cors';
+import { routerProductos } from './src/routes/productos.routes.js';
+import { routerCarrito } from './src/routes/carrito.routes.js';
+import { routerMensajes } from './src/routes/mensajes.routes.js';
 import minimist from 'minimist';
 import cluster from 'cluster';
 import os from 'os';
-import { logger } from './src/config/configLogger.js';
 import { config } from './src/config/config.js';
-import { graphqlHTTP } from 'express-graphql';
-import GraphqlSchema from './src/graphql/schema.js'
-import { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct, getCartProducts, addToCart, deleteCartProduct } from './src/graphql/resolver.js';
-
-const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer);
 
 
-const MongoStore = connectMongo.create({
-    mongoUrl: "mongodb+srv://Lautaro:batman123@cluster0.jfywafn.mongodb.net/sessions?retryWrites=true&w=majority",
-    ttl: 600 
-});
+const app = new koa();
+const io = new Server(app);
 
-app.use(session({
-    store: MongoStore,
-    secret: "1234567890!@#$%^&*()",
-    resave: true,
-    saveUninitialized: true
+const pug = new Pug({
+    viewPath: './src/views',
+    basedir: './src/views',
+    app: app 
+})
+
+app.use(mongo({
+    url: config.server.MONGO_URL,
+    pass: config.server.SECRET_KEY,
+    max: 600,
+    min: 1,
 }));
 
+app.keys = [config.server.SECRET_KEY];
 
-if(config.server.ENVIRONMENT == 'development') {
-    app.use(cors())
-} else {
-    app.use(cors({
-        origin: 'http://localhost:8080',
-        optionsSuccessStatus: 200,
-        methods: "GET, PUT, POST"
-    }));
-}
+app.use(session(app));
+
+app.use(koaBody());
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+app.use(koaStatic('./public'));
 
-app.set('views', './src/views');
-app.set('view engine', 'pug');
-
-app.use('/api/productos', routerProductos);
-app.use('/api/carrito', routerCarrito);
-app.use('/api/mensajes', routerMensajes);
-app.use('/api/', routerAuth);
-app.use('/api/home', routerHome);
-
-app.use('/api/graphql', routerGraphql, graphqlHTTP({
-    schema: GraphqlSchema,
-    rootValue: {
-        getAllProducts,
-        getProductById,
-        addProduct,
-        updateProduct,
-        deleteProduct,
-        getCartProducts,
-        addToCart,
-        deleteCartProduct
-    },
-    graphiql: true,
-}));
-
-
-app.get('*', (req, res)=>{
-    const {url, method } = req;
-    logger.warn(`Ruta ${method} ${url} no implementada`)
-    res.render('viewRutaIncorrecta', { url, method });
-});
+app.use(routerProductos.routes());
+app.use(routerHome.routes());
+app.use(routerMensajes.routes());
+app.use(routerCarrito.routes());
+app.use(routerAuth.routes());
 
 let args = minimist(process.argv.slice(2));
 
@@ -117,12 +82,11 @@ if (cluster.isPrimary && MODO == 'CLUSTER') {
         throw new Error()
     } 
 
-    const server = httpServer.listen(PORT, () => {
-        logger.info(`Servidor escuchando en puerto http://localhost:${PORT}/api - PID WORKER ${process.pid}`);
+    const server = app.listen(PORT, () => {
+        logger.info(`Servidor escuchando en puerto http://localhost:${PORT}/api`);
     });
 
     server.on('error', err => logger.error(`error en server ${err}`));
-
 
     io.on('connection', async socket => {
         logger.info(`Nuevo cliente conectado! ${socket.id}`);
@@ -136,4 +100,5 @@ if (cluster.isPrimary && MODO == 'CLUSTER') {
 
     });
 }
-export default app;
+
+export {app};

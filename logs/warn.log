@@ -1064,3 +1064,233 @@
   descripcion: 'Update',
   detalle: 'Elemento no encontrado.'
 }
+[2023-01-16T13:13:41.566] [ERROR] default - error en server Error: listen EADDRINUSE: address already in use :::8080
+[2023-01-16T13:15:29.745] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:15:29.789] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:15:39.029] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:15:39.073] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:15:44.370] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:15:44.386] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:18:46.982] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:18:47.029] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:19:31.155] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:19:31.172] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:20:57.007] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:20:57.028] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:23:52.685] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:23:52.731] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:11.145] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:11.189] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:44.928] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:44.945] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:51.917] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:24:51.933] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:25:15.268] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T13:25:15.286] [ERROR] default - error en server TypeError: next is not a function
+[2023-01-16T15:23:32.510] [ERROR] default - Error: productos validation failed: stock: Path `stock` is required., precio: Path `precio` is required., foto: Path `foto` is required., codigo: Path `codigo` is required., descripcion: Path `descripcion` is required., nombre: Path `nombre` is required.
+    at ValidationError.inspect (C:\backend\desafio\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2273:40)
+    at Object.format (node:internal/util/inspect:2130:10)
+    at basicLayout (C:\backend\desafio\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\backend\desafio\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\backend\desafio\node_modules\log4js\lib\appenders\logLevelFilter.js:10:7
+    at C:\backend\desafio\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (C:\backend\desafio\node_modules\log4js\lib\log4js.js:42:21)
+    at C:\backend\desafio\node_modules\log4js\lib\clustering.js:25:28
+    at Array.forEach (<anonymous>)
+    at sendToListeners (C:\backend\desafio\node_modules\log4js\lib\clustering.js:25:13)
+    at Object.send (C:\backend\desafio\node_modules\log4js\lib\clustering.js:91:7)
+    at Logger._log (C:\backend\desafio\node_modules\log4js\lib\logger.js:195:16) {
+  errors: {
+    stock: ValidatorError: Path `stock` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'stock',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    precio: ValidatorError: Path `precio` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'precio',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    foto: ValidatorError: Path `foto` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'foto',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    codigo: ValidatorError: Path `codigo` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'codigo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    descripcion: ValidatorError: Path `descripcion` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'descripcion',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    nombre: ValidatorError: Path `nombre` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'nombre',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'productos validation failed'
+}
+[2023-01-17T14:18:09.377] [ERROR] default - Error: carritos validation failed: id: Path `id` is required.
+    at ValidationError.inspect (C:\backend\desafio\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2273:40)
+    at Object.format (node:internal/util/inspect:2130:10)
+    at basicLayout (C:\backend\desafio\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\backend\desafio\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\backend\desafio\node_modules\log4js\lib\appenders\logLevelFilter.js:10:7
+    at C:\backend\desafio\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>) {
+  errors: {
+    id: ValidatorError: Path `id` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'id',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'carritos validation failed'
+}
+[2023-01-17T14:46:38.989] [ERROR] default - Error: productos validation failed: stock: Path `stock` is required., precio: Path `precio` is required., foto: Path `foto` is required., codigo: Path `codigo` is required., descripcion: Path `descripcion` is required., nombre: Path `nombre` is required.
+    at ValidationError.inspect (C:\backend\desafio\node_modules\mongoose\lib\error\validation.js:50:26)
+    at formatValue (node:internal/util/inspect:806:19)
+    at inspect (node:internal/util/inspect:365:10)
+    at formatWithOptionsInternal (node:internal/util/inspect:2273:40)
+    at Object.format (node:internal/util/inspect:2130:10)
+    at basicLayout (C:\backend\desafio\node_modules\log4js\lib\layouts.js:65:52)
+    at app (C:\backend\desafio\node_modules\log4js\lib\appenders\file.js:98:23)
+    at C:\backend\desafio\node_modules\log4js\lib\appenders\logLevelFilter.js:10:7
+    at C:\backend\desafio\node_modules\log4js\lib\log4js.js:43:5
+    at Array.forEach (<anonymous>) {
+  errors: {
+    stock: ValidatorError: Path `stock` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'stock',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    precio: ValidatorError: Path `precio` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'precio',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    foto: ValidatorError: Path `foto` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'foto',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    codigo: ValidatorError: Path `codigo` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'codigo',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    descripcion: ValidatorError: Path `descripcion` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'descripcion',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    },
+    nombre: ValidatorError: Path `nombre` is required.
+        at validate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1346:13)
+        at SchemaType.doValidate (C:\backend\desafio\node_modules\mongoose\lib\schematype.js:1330:7)
+        at C:\backend\desafio\node_modules\mongoose\lib\document.js:2877:18
+        at process.processTicksAndRejections (node:internal/process/task_queues:77:11) {
+      properties: [Object],
+      kind: 'required',
+      path: 'nombre',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'productos validation failed'
+}

@@ -23,8 +23,8 @@ export async function agregarMensaje(mensaje) {
 };
 
 
-export async function getAllMessages(req, res) {
-    const {url, method } = req;
+export async function getAllMessages(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/mensajes${url}`);
-    res.render('viewChat', await apiMensajes.getAll());
+    ctx.render('viewChat', await apiMensajes.getAll());
 }; 

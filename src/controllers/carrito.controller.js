@@ -23,22 +23,28 @@ const transporter = createTransport({
    }
 });
 
-export async function deleteCartById(req, res) {
-    const {url, method } = req;
+export async function deleteCartById(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    res.json((await apiCarrito.deleteById(req.params.id)));
+    ctx.body = {
+        status: 'success',
+        data: await apiCarrito.deleteById(ctx.params.id)
+    }
 }; 
 
-export async function getCartProducts(req, res) {
-    const {url, method } = req;
+export async function getCartProducts(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const carrito = await apiCarrito.getById(req.params.id);
-    res.json((carrito.productos));
+    const carrito = await apiCarrito.getById(ctx.params.id);
+    ctx.body = {
+        status: 'success',
+        data: carrito.productos
+    }
 }; 
 
-export async function cartView(req, res) {
-    const {url, method } = req;
-    const datos = await apiUsuarios.getById(req.user.username)
+export async function cartView(ctx) {
+    const {url, method } = ctx.req;
+    const datos = await apiUsuarios.getById(ctx.req.user.username)
     const info = {
         edad: usuario.getAge(datos.dateOfBirth),
         aniversario: usuario.getBirthday(datos.dateOfBirth)
@@ -47,28 +53,27 @@ export async function cartView(req, res) {
     logger.info(`Ruta ${method} /api/carrito${url}`);
     const carrito = await apiCarrito.getById(datos.id);
     const userInfo =  new UsuarioDTO(datos, info);
-    res.render('viewCarrito', {carrito, userInfo, srcImg});
+    ctx.render('viewCarrito', {carrito, userInfo, srcImg});
 }; 
 
 
-export async function addToCart (req, res) {
-    const {url, method } = req;
+export async function addToCart (ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const id = req.user.id;
+    const id = ctx.req.user.id;
     const carrito = await apiCarrito.getById(id);
-    const producto = await apiProductos.getById(req.body.idProd);
+    const producto = await apiProductos.getById(ctx.req.body.idProd);
     carrito.productos.push(producto);
     const elem = {...carrito, id: Number(id)};
     await apiCarrito.update(elem);
-    res.redirect('/api/home');
+    ctx.redirect('/api/home');
 }; 
 
 
-export async function buyProducts(req, res) {
-    const {url, method } = req;
+export async function buyProducts(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-
-    const { id, name, username, phone } = req.user;
+    const { id, name, username, phone } = ctx.req.user;
     const carrito = await apiCarrito.getById(id);
     const lista = [];
     for (let i=0; i < carrito.productos.length; i++) {
@@ -97,20 +102,20 @@ export async function buyProducts(req, res) {
     logger.info(message); 
 
     await apiCarrito.emptyCart(id);
-    res.redirect('/api/home');
+    ctx.redirect('/api/home');
 }; 
 
-export async function deleteCartProduct (req, res) {
-    const {url, method } = req;
+export async function deleteCartProduct (ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/carrito${url}`);
-    const carrito = await apiCarrito.getById(req.params.id);
-    const index = carrito.productos.findIndex( p => p.id == req.params.id_prod);
+    const carrito = await apiCarrito.getById(ctx.params.id);
+    const index = carrito.productos.findIndex( p => p.id == ctx.params.id_prod);
     if (index != -1 ) {
         carrito.productos.splice(index, 1);
-        const elem = {...carrito, id: Number(req.params.id)};
+        const elem = {...carrito, id: Number(ctx.params.id)};
         await apiCarrito.update(elem);
     }
-    res.end();
+    ctx.end();
 };
 
 

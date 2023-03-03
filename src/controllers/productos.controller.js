@@ -5,8 +5,8 @@ import Cotizador from '../classes/Cotizador.class.js';
 
 const cot = new Cotizador();
 
-export async function getAllProducts(req, res) {
-    const { url, method } = req;
+export async function getAllProducts(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
     const docs  = await apiProductos.getAll();
     const docsDto = docs.map(producto => {
@@ -16,42 +16,68 @@ export async function getAllProducts(req, res) {
         }
         return new ProductoDTO(producto, cotizaciones);
     })
-    res.status(200).json((docsDto));
+    ctx.body = {
+        status: 'success',
+        data: docsDto
+    }
 }; 
 
-export async function getProductById(req, res) {
-    const {url, method } = req;
+export async function getProductById(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
-    const producto = await apiProductos.getById(req.params.id);
+    const producto = await apiProductos.getById(ctx.params.id);
     const cotizaciones = {
         precioDolar: cot.getPrice(producto.precio, 'USD'),
         precioBTC: cot.getPrice(producto.precio, 'BTC')
     }
-    return res.json( new ProductoDTO(producto, cotizaciones)) ;
+    ctx.body = {
+        status: 'success',
+        data: new ProductoDTO(producto, cotizaciones)
+    }
 }; 
 
-export async function addProduct(req, res) {
-    const {url, method } = req;
+export async function addProduct(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
-    res.status(200).json((await apiProductos.add(req.body)));
+    const newProd = {
+        precio: ctx.request.body.precio,
+        nombre: ctx.request.body.nombre,
+        foto: ctx.request.body.foto,
+        codigo: ctx.request.body.codigo,
+        stock: ctx.request.body.stock,
+        descripcion: ctx.request.body.descripcion
+    }
+    ctx.body = {
+        status: 'success',
+        data: await apiProductos.add(newProd)
+    }
 }; 
 
-export async function updateProduct(req, res) {
-    const {url, method } = req;
+export async function updateProduct(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
-    const elem = {...req.body, id: Number(req.params.id)};
-    res.status(200).json((await apiProductos.update(elem)));
+    const elem = {...ctx.request.body, id: Number(ctx.params.id)};
+    ctx.body = {
+        status: 'success',
+        data: await apiProductos.update(elem)
+    }
 }; 
 
-export async function deleteProduct(req, res) {
-    const {url, method } = req;
+export async function deleteProduct(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
-    res.status(202).json((await apiProductos.deleteById(req.params.id)));
+    ctx.body = {
+        status: 'success',
+        data: await apiProductos.deleteById(ctx.params.id)
+    }
 }; 
 
-export async function deleteAllProducts(req, res) {
-    const {url, method } = req;
+export async function deleteAllProducts(ctx) {
+    const {url, method } = ctx.req;
     logger.info(`Ruta ${method} /api/productos${url}`);
-    res.json((await apiProductos.deleteAll()));
+    ctx.body = {
+        status: 'success',
+        data: await apiProductos.deleteAll()
+    }
 }; 
 
