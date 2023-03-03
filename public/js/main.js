@@ -6,8 +6,6 @@ const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor
 
 const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [schemaMensaje] }, { idAttribute: 'id' })
 
-
-
 socket.on('from-server-messages', messages => {
     let mensajesNsize = JSON.stringify(messages).length;
     let mensajesD = normalizr.denormalize(messages.result, schemaMensajes, messages.entities);

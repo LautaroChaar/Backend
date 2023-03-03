@@ -20,6 +20,7 @@ const normalizarMensajes = (mensajesId) => normalize(mensajesId, schemaMensajes)
 async function listarMensajesNormalizados() {
     const mensajes = await apiMensajes.getAll();
     const normalizados = normalizarMensajes({ id: 'mensajes', mensajes });
+    // console.log(util.inspect(normalizados, false, 5, true));
     return normalizados;
 }
 
