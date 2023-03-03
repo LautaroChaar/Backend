@@ -30,7 +30,7 @@ const LocalStrategy = Strategy;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/backend/desafio/public/uploads');
+      cb(null, './public/uploads');
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()} - ${file.originalname}`);
@@ -103,7 +103,7 @@ export async function registerNewUser(req, res) {
             await apiUsuarios.add(newUser);
             const mailOptions = {
                 from: 'Servidor Node.js',
-                to: TEST_MAIL,
+                to: config.server.TEST_EMAIL,
                 subject: 'Nuevo Registro',
                 html: `<h1>${name}</h1><h5>Email: ${username}</h5><h5>Fecha de nacimiento: ${dateOfBirth}</h5><h5>Dirección: ${adress}</h5><h5>Teléfono: ${phone}</h5>`
             }

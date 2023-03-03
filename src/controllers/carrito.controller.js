@@ -114,7 +114,7 @@ export async function buyProducts(req, res) {
         const string = lista.toString();
         const mailOptions = {
             from: 'Servidor Node.js',
-            to: TEST_MAIL,
+            to: config.server.TEST_EMAIL,
             subject: `Nuevo pedido de: ${name} (${username})`,
             html: `
             Direccion de entrega: ${adress}</br>

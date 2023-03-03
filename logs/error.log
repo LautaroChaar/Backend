@@ -29,3 +29,9 @@
   },
   valueType: 'string'
 }
+[2023-03-03T13:39:02.214] [ERROR] default - ReferenceError: TEST_MAIL is not defined
+    at registerNewUser (file:///D:/Mis%20Documentos/Desktop/Portfolio/backend-coderhouse/src/controllers/auth.controller.js:106:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[2023-03-03T13:40:11.013] [ERROR] default - ReferenceError: TEST_MAIL is not defined
+    at registerNewUser (file:///D:/Mis%20Documentos/Desktop/Portfolio/backend-coderhouse/src/controllers/auth.controller.js:106:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
