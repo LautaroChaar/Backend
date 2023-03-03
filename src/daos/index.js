@@ -3,22 +3,27 @@ dotenv.config()
 
 let productosDao;
 let carritosDao;
+let mensajesDao;
 
 switch (process.env.PERS) {
     case 'json':
         const { default: ProductosDaoArchivos } = await import('./productos/productosDaoArchivos.js');
         const { default: CarritosDaoArchivos } = await import('./carritos/carritosDaoArchivos.js');
+        const { default: MensajesDaoArchivos } = await import('./mensajes/mensajesDaoArchivos.js');
 
         productosDao = new ProductosDaoArchivos();
         carritosDao = new CarritosDaoArchivos();
+        mensajesDao = new MensajesDaoArchivos();
         break;
 
     case 'firebase':
         const { default: ProductosDaoFirebase} = await import('./productos/productosDaoFirebase.js');
         const { default: CarritosDaoFirebase } = await import('./carritos/carritosDaoFirebase.js');
+        const { default: MensajesDaoFirebase } = await import('./mensajes/mensajesDaoFirebase.js');
 
         productosDao = new ProductosDaoFirebase();
         carritosDao = new CarritosDaoFirebase();
+        mensajesDao = new MensajesDaoFirebase();
         break;
 
     case 'memoria':
@@ -32,9 +37,11 @@ switch (process.env.PERS) {
     case 'mongoDB': 
         const { default: ProductosDaoMongoDB } = await import('./productos/productosDaoMongoDB.js');
         const { default: CarritosDaoMongoDB } = await import('./carritos/carritosDaoMongoDB.js');
+        const { default: MensajesDaoMongoDB } = await import('./mensajes/mensajesDaoMongoDB.js');
 
         productosDao = new ProductosDaoMongoDB();
         carritosDao = new CarritosDaoMongoDB();
+        mensajesDao = new MensajesDaoMongoDB();
         break;
 
     case 'mariaDB':
@@ -47,5 +54,4 @@ switch (process.env.PERS) {
 
     }
 
-export { productosDao, carritosDao };
-
+export { productosDao, carritosDao, mensajesDao };
